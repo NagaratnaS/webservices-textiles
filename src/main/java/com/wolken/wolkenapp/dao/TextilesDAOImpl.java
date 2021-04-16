@@ -53,8 +53,19 @@ public class TextilesDAOImpl implements TextilesDAO{
 	@Override
 	public int updateByID(TextileEntity entity) {
 		// TODO Auto-generated method stub
+		SessionFactory factory = configuration.buildSessionFactory();
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("update TextileEntity te set te.textileShopName = :textileShopName , te.location = :location , te.noOfFloors = :noOfFloors where te.textileShopID = :textileShopID");
+		query.setParameter("textileShopID", entity.getTextileShopID());
+		query.setParameter("textileShopName", entity.getTextileShopName());
+		query.setParameter("location", entity.getLocation());
+		query.setParameter("noOfFloors", entity.getNoOfFloors());
 		
-		return 0;
+		int result = query.executeUpdate();
+		transaction.commit();
+		session.close();
+		return result;
 	}
 
 }

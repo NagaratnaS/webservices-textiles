@@ -46,6 +46,26 @@ public class TextileServiceImpl implements TextileService{
 		}
 		return dto;
 	}
+
+	@Override
+	public String validateAndUpdateByID(TextileDTO dto) {
+		// TODO Auto-generated method stub
+		if(dto != null) {
+			if(dto.getTextileShopID() > 0 && !dto.getTextileShopName().equals(null) && !dto.getLocation().equals(null) && dto.getNoOfFloors() > 0) {
+				entity.setTextileShopID(dto.getTextileShopID());
+				entity.setTextileShopName(dto.getTextileShopName());
+				entity.setLocation(dto.getLocation());
+				entity.setNoOfFloors(dto.getNoOfFloors());
+				int result = dao.updateByID(entity);
+				if(result > 0) {
+					return "Successfully updated!!";
+				}
+				
+			}
+			
+		}
+		return "Not updated , some error occured";
+	}
 	
 
 }

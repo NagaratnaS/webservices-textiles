@@ -1,5 +1,7 @@
 package com.wolken.wolkenapp.dao;
 
+import java.util.List;
+
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -66,6 +68,19 @@ public class TextilesDAOImpl implements TextilesDAO{
 		transaction.commit();
 		session.close();
 		return result;
+	}
+	@Override
+	public List<TextileEntity> getAll() {
+		// TODO Auto-generated method stub
+		SessionFactory factory = configuration.buildSessionFactory();
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("from TextileEntity");
+		List<TextileEntity>getalllist = query.list();
+		
+		transaction.commit();
+		session.close();
+		return getalllist;
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.wolken.wolkenapp.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -65,6 +68,22 @@ public class TextileServiceImpl implements TextileService{
 			
 		}
 		return "Not updated , some error occured";
+	}
+
+	@Override
+	public List<TextileDTO> validateAndGetAll() {
+		// TODO Auto-generated method stub
+		List<TextileEntity> entityList = dao.getAll();
+		List<TextileDTO> dtoList = new ArrayList<TextileDTO>();;
+		for(TextileEntity tempEntity: entityList) {
+			dto = new TextileDTO();
+			dto.setTextileShopID(tempEntity.getTextileShopID());
+			dto.setTextileShopName(tempEntity.getTextileShopName());
+			dto.setLocation(tempEntity.getLocation());
+			dto.setNoOfFloors(tempEntity.getNoOfFloors());
+			dtoList.add(dto);
+		}
+		return dtoList;
 	}
 	
 

@@ -1,5 +1,7 @@
 package com.wolken.wolkenapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +44,10 @@ public class TextileController {
 		return service.validateAndUpdateByID(dto);
 	}
 	
-	
+	@GetMapping("/getall")
+	public List<TextileDTO> getAll(){
+		return service.validateAndGetAll();
+	}
 	
 
 }

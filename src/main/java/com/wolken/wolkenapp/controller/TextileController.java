@@ -3,6 +3,7 @@ package com.wolken.wolkenapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,6 +48,11 @@ public class TextileController {
 	@GetMapping("/getall")
 	public List<TextileDTO> getAll(){
 		return service.validateAndGetAll();
+	}
+	
+	@DeleteMapping("/delete")
+	public String delete(Integer textileShopID) {
+		return service.validateAndDelete(textileShopID);
 	}
 	
 

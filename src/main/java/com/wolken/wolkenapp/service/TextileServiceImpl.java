@@ -85,6 +85,17 @@ public class TextileServiceImpl implements TextileService{
 		}
 		return dtoList;
 	}
+
+	@Override
+	public String validateAndDelete(int textileShopID) {
+		// TODO Auto-generated method stub
+		if(textileShopID > 0) {
+			int result = dao.deleteByID(textileShopID);
+			if (result > 0) 
+				return "Deleted successfully!!";
+		}
+		return "Some error occurred!!";
+	}
 	
 
 }

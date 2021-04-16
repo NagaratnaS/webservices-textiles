@@ -9,5 +9,6 @@ public interface TextileService {
 	public TextileDTO validateAndGet(int textileShopID);
 	public String validateAndUpdateByID(TextileDTO dto);
 	public List<TextileDTO> validateAndGetAll();
+	public String validateAndDelete(int textileShopID);
 
 }

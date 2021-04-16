@@ -82,5 +82,18 @@ public class TextilesDAOImpl implements TextilesDAO{
 		session.close();
 		return getalllist;
 	}
+	@Override
+	public int deleteByID(int textileShopID) {
+		// TODO Auto-generated method stub
+		SessionFactory factory = configuration.buildSessionFactory();
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("delete from TextileEntity te where te.textileShopID = :textileShopID");
+		query.setParameter("textileShopID", textileShopID);
+		int result = query.executeUpdate();
+		transaction.commit();
+		session.close();
+		return result;
+	}
 
 }

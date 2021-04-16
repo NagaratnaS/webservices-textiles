@@ -5,7 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.wolken.wolkenapp.entity.TextileEntity;
@@ -13,7 +14,8 @@ import com.wolken.wolkenapp.entity.TextileEntity;
 @Component
 public class TextilesDAOImpl implements TextilesDAO{
 
-
+	@Autowired
+	TextileEntity entity;
 	
 	Configuration configuration = new Configuration();
 	
@@ -39,8 +41,13 @@ public class TextilesDAOImpl implements TextilesDAO{
 	@Override
 	public TextileEntity getByID(int textileShopID) {
 		// TODO Auto-generated method stub
-		
-		return null;
+		SessionFactory factory = configuration.buildSessionFactory();
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("from TextileEntity te where te.textileShopID = :textileShopID");
+		query.setParameter("textileShopID", textileShopID);
+		TextileEntity entity = (TextileEntity) query.uniqueResult();
+		return entity;
 	}
 
 	@Override

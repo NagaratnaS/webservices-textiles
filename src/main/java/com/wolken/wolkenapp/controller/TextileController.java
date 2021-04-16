@@ -16,6 +16,8 @@ public class TextileController {
 	
 	@Autowired
 	TextileService service;
+	@Autowired
+	TextileDTO dto;
 	
 	@GetMapping("/")
 	public String index() {
@@ -24,11 +26,17 @@ public class TextileController {
 	
 	@PostMapping("/save")
 	public String save(@RequestBody TextileDTO dto) {
-		System.out.println("Hi" + dto.getTextileShopID());
 		String message = service.validateAndAdd(dto);
 		return message;
 	}
 	
+	
+	
+	@GetMapping("/get")
+	public TextileDTO getByID(Integer textileShopID) {
+		dto = service.validateAndGet(textileShopID);
+		return dto;
+	}
 	
 	
 	

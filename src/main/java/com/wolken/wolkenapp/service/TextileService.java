@@ -4,5 +4,6 @@ import com.wolken.wolkenapp.dto.TextileDTO;
 
 public interface TextileService {
 	public String validateAndAdd(TextileDTO dto);
+	public TextileDTO validateAndGet(int textileShopID);
 
 }

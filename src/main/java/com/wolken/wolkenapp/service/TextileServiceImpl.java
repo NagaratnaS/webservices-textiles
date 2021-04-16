@@ -15,6 +15,8 @@ public class TextileServiceImpl implements TextileService{
 	TextilesDAO dao;
 	@Autowired
 	TextileEntity entity;
+	@Autowired
+	TextileDTO dto;
 
 	@Override
 	public String validateAndAdd(TextileDTO dto) {
@@ -30,6 +32,19 @@ public class TextileServiceImpl implements TextileService{
 			}
 		}
 		return message;
+	}
+
+	@Override
+	public TextileDTO validateAndGet(int textileShopID) {
+		// TODO Auto-generated method stub
+		if(textileShopID > 0) {
+			entity = dao.getByID(textileShopID);
+			dto.setTextileShopID(entity.getTextileShopID());
+			dto.setTextileShopName(entity.getTextileShopName());
+			dto.setLocation(entity.getLocation());
+			dto.setNoOfFloors(entity.getNoOfFloors());
+		}
+		return dto;
 	}
 	
 
